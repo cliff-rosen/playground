@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { LayoutGrid, List } from 'lucide-react';
 import CondensedWorkflow from './workflow/CondensedWorkflow';
 import FullWorkflow from './workflow/FullWorkflow';
+import type { Stage } from '../types';
 
 interface WorkflowProps {
     className?: string;
+    stages: Stage[];
 }
 
-export default function Workflow({ className = '' }: WorkflowProps) {
+export default function Workflow({ className = '', stages }: WorkflowProps) {
     const [viewMode, setViewMode] = useState<'compact' | 'expanded'>('compact');
 
     return (
@@ -37,9 +39,9 @@ export default function Workflow({ className = '' }: WorkflowProps) {
             </div>
 
             {viewMode === 'compact' ? (
-                <CondensedWorkflow className="mt-4" />
+                <CondensedWorkflow className="mt-4" stages={stages} />
             ) : (
-                <FullWorkflow className="mt-4" />
+                <FullWorkflow className="mt-4" stages={stages} />
             )}
         </div>
     );

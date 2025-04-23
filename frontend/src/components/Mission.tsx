@@ -1,23 +1,51 @@
 import React from 'react';
+import type { Mission as MissionType } from '../types';
 
 interface MissionProps {
     className?: string;
+    mission: MissionType;
 }
 
-export default function Mission({ className = '' }: MissionProps) {
+export default function Mission({ className = '', mission }: MissionProps) {
+    const getStatusColor = (status: MissionType['status']) => {
+        switch (status) {
+            case 'completed':
+                return 'text-emerald-700 bg-emerald-100';
+            case 'current':
+                return 'text-blue-700 bg-blue-100';
+            case 'failed':
+                return 'text-red-700 bg-red-100';
+            default:
+                return 'text-gray-700 bg-gray-100';
+        }
+    };
+
+    const getStatusText = (status: MissionType['status']) => {
+        switch (status) {
+            case 'completed':
+                return 'Completed';
+            case 'current':
+                return 'In Progress';
+            case 'failed':
+                return 'Failed';
+            default:
+                return 'Pending';
+        }
+    };
+
     return (
         <div className={className}>
             <div className="flex items-start justify-between">
                 <div>
                     <h2 className="text-xs font-medium text-gray-500 uppercase tracking-wider">Current Mission</h2>
-                    <h1 className="text-2xl font-semibold text-gray-900 mt-1">Summarize Customer Feedback</h1>
+                    <h1 className="text-2xl font-semibold text-gray-900 mt-1">{mission.title}</h1>
                     <p className="mt-3 text-gray-600 leading-relaxed">
-                        Analyze customer feedback from various sources to generate a comprehensive summary of key insights and trends. This will help us understand customer sentiment and identify areas for improvement.
+                        {mission.description}
                     </p>
                 </div>
                 <div className="flex items-center">
-                    <span className="px-2 py-1 text-xs font-medium text-emerald-700 bg-emerald-100 rounded-full whitespace-nowrap">
-                        In Progress
+                    <span className={`px-2 py-1 text-xs font-medium rounded-full whitespace-nowrap ${getStatusColor(mission.status)}`}>
+                        {getStatusText(mission.status)}
                     </span>
                 </div>
             </div>
@@ -26,35 +54,27 @@ export default function Mission({ className = '' }: MissionProps) {
                 <div>
                     <h3 className="text-xs font-medium text-gray-500 uppercase tracking-wider">Inputs</h3>
                     <ul className="mt-2 space-y-1 text-gray-600">
-                        <li className="flex items-center">
-                            <span className="w-1.5 h-1.5 rounded-full bg-gray-400 mr-2"></span>
-                            Customer feedback emails
-                        </li>
-                        <li className="flex items-center">
-                            <span className="w-1.5 h-1.5 rounded-full bg-gray-400 mr-2"></span>
-                            Support ticket data
-                        </li>
-                        <li className="flex items-center">
-                            <span className="w-1.5 h-1.5 rounded-full bg-gray-400 mr-2"></span>
-                            Survey responses
-                        </li>
+                        {mission.assets
+                            .filter(asset => mission.stages[0]?.assets.inputs.includes(asset.id))
+                            .map(asset => (
+                                <li key={asset.id} className="flex items-center">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-gray-400 mr-2"></span>
+                                    {asset.name}
+                                </li>
+                            ))}
                     </ul>
                 </div>
                 <div>
                     <h3 className="text-xs font-medium text-gray-500 uppercase tracking-wider">Outputs</h3>
                     <ul className="mt-2 space-y-1 text-gray-600">
-                        <li className="flex items-center">
-                            <span className="w-1.5 h-1.5 rounded-full bg-gray-400 mr-2"></span>
-                            Summary report
-                        </li>
-                        <li className="flex items-center">
-                            <span className="w-1.5 h-1.5 rounded-full bg-gray-400 mr-2"></span>
-                            Key insights
-                        </li>
-                        <li className="flex items-center">
-                            <span className="w-1.5 h-1.5 rounded-full bg-gray-400 mr-2"></span>
-                            Action items
-                        </li>
+                        {mission.assets
+                            .filter(asset => mission.stages[mission.stages.length - 1]?.assets.outputs.includes(asset.id))
+                            .map(asset => (
+                                <li key={asset.id} className="flex items-center">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-gray-400 mr-2"></span>
+                                    {asset.name}
+                                </li>
+                            ))}
                     </ul>
                 </div>
             </div>

@@ -1,45 +1,26 @@
 import React from 'react';
 import { FileText, Image, Database, Code } from 'lucide-react';
-
-interface Asset {
-    id: string;
-    name: string;
-    type: string;
-    icon: React.ReactNode;
-}
-
-const assets: Asset[] = [
-    {
-        id: '1',
-        name: 'Customer Feedback',
-        type: 'Document',
-        icon: <FileText className="w-4 h-4" />,
-    },
-    {
-        id: '2',
-        name: 'Survey Results',
-        type: 'Spreadsheet',
-        icon: <Database className="w-4 h-4" />,
-    },
-    {
-        id: '3',
-        name: 'Support Tickets',
-        type: 'Database',
-        icon: <Code className="w-4 h-4" />,
-    },
-    {
-        id: '4',
-        name: 'User Screenshots',
-        type: 'Images',
-        icon: <Image className="w-4 h-4" />,
-    },
-];
+import type { Asset } from '../types';
 
 interface AssetsProps {
     className?: string;
+    assets: Asset[];
 }
 
-export function Assets({ className = '' }: AssetsProps) {
+const getAssetIcon = (type: string) => {
+    switch (type) {
+        case 'document':
+            return <FileText className="w-4 h-4" />;
+        case 'dataset':
+            return <Database className="w-4 h-4" />;
+        case 'image':
+            return <Image className="w-4 h-4" />;
+        default:
+            return <Code className="w-4 h-4" />;
+    }
+};
+
+export function Assets({ className = '', assets }: AssetsProps) {
     return (
         <div className={`flex flex-col h-full bg-white/95 ${className}`}>
             <div className="px-4 py-3 border-b">
@@ -53,7 +34,7 @@ export function Assets({ className = '' }: AssetsProps) {
                             className="flex items-center p-2 hover:bg-gray-50 rounded-lg cursor-pointer group"
                         >
                             <div className="w-8 h-8 rounded bg-gray-50 flex items-center justify-center text-gray-600">
-                                {asset.icon}
+                                {getAssetIcon(asset.type)}
                             </div>
                             <div className="ml-3 flex-1">
                                 <div className="text-sm font-medium text-gray-700">{asset.name}</div>
