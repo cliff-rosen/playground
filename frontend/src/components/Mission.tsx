@@ -42,6 +42,9 @@ export default function Mission({ className = '', mission }: MissionProps) {
                     <p className="mt-3 text-gray-600 leading-relaxed">
                         {mission.description}
                     </p>
+                    <p className="mt-2 text-sm text-gray-500">
+                        <span className="font-medium">Goal:</span> {mission.goal}
+                    </p>
                 </div>
                 <div className="flex items-center">
                     <span className={`px-2 py-1 text-xs font-medium rounded-full whitespace-nowrap ${getStatusColor(mission.status)}`}>
@@ -55,7 +58,7 @@ export default function Mission({ className = '', mission }: MissionProps) {
                     <h3 className="text-xs font-medium text-gray-500 uppercase tracking-wider">Inputs</h3>
                     <ul className="mt-2 space-y-1 text-gray-600">
                         {mission.assets
-                            .filter(asset => mission.stages[0]?.assets.inputs.includes(asset.id))
+                            .filter(asset => mission.workflow.stages[0]?.assets.inputs.includes(asset.id))
                             .map(asset => (
                                 <li key={asset.id} className="flex items-center">
                                     <span className="w-1.5 h-1.5 rounded-full bg-gray-400 mr-2"></span>
@@ -68,7 +71,7 @@ export default function Mission({ className = '', mission }: MissionProps) {
                     <h3 className="text-xs font-medium text-gray-500 uppercase tracking-wider">Outputs</h3>
                     <ul className="mt-2 space-y-1 text-gray-600">
                         {mission.assets
-                            .filter(asset => mission.stages[mission.stages.length - 1]?.assets.outputs.includes(asset.id))
+                            .filter(asset => mission.workflow.stages[mission.workflow.stages.length - 1]?.assets.outputs.includes(asset.id))
                             .map(asset => (
                                 <li key={asset.id} className="flex items-center">
                                     <span className="w-1.5 h-1.5 rounded-full bg-gray-400 mr-2"></span>

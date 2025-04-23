@@ -64,13 +64,26 @@ export type Stage = {
     updatedAt: string;
 }
 
+// Workflow types
+export type Workflow = {
+    id: string;
+    name: string;
+    description: string;
+    status: Status;
+    stages: Stage[];
+    assets: Asset[];
+    createdAt: string;
+    updatedAt: string;
+}
+
 // Mission types
 export type Mission = {
     id: string;
     title: string;
     description: string;
+    goal: string;
     status: Status;
-    stages: Stage[];
+    workflow: Workflow;
     assets: Asset[];
     createdAt: string;
     updatedAt: string;

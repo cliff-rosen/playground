@@ -43,7 +43,7 @@ export default function App() {
 
             {/* Stage Tracker */}
             <div className="mb-6">
-              <Workflow stages={mockMission.stages} />
+              <Workflow workflow={mockMission.workflow} />
             </div>
 
             {/* Workspace Canvas */}

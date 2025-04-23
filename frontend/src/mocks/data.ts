@@ -1,4 +1,4 @@
-import { Mission, Stage, Step, Asset, ChatMessage, Workspace } from '../types';
+import { Mission, Stage, Step, Asset, ChatMessage, Workspace, Workflow } from '../types';
 
 export const mockAssets: Asset[] = [
     {
@@ -150,12 +150,24 @@ export const mockStages: Stage[] = [
     }
 ];
 
+export const mockWorkflow: Workflow = {
+    id: 'workflow-1',
+    name: 'Customer Feedback Analysis Workflow',
+    description: 'Standard workflow for analyzing customer feedback',
+    status: 'current',
+    stages: mockStages,
+    assets: mockAssets,
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-02T02:00:00Z'
+};
+
 export const mockMission: Mission = {
     id: 'mission-1',
     title: 'Customer Feedback Analysis',
     description: 'Analyze customer feedback to identify key insights and trends',
+    goal: 'Create a report on customer feedback that contains the most common issues and suggestions for improvement',
     status: 'current',
-    stages: mockStages,
+    workflow: mockWorkflow,
     assets: mockAssets,
     createdAt: '2024-01-01T00:00:00Z',
     updatedAt: '2024-01-02T02:00:00Z'
