@@ -10,28 +10,35 @@ export default function App() {
   return (
     <div className="h-screen flex flex-col">
       <Header className="z-50" />
-      <div className="flex flex-1 min-h-0 pt-14">
-        {/* Left Column - Chat */}
-        <div className="w-[400px] bg-white border-r overflow-auto">
-          <Chat />
-        </div>
+      <div className="flex-1 min-h-0 pt-14">
+        <div className="grid grid-cols-12 gap-6 h-full">
+          {/* Left Chat Rail (cols 1-3) */}
+          <div className="col-span-3 h-full overflow-hidden">
+            <Chat />
+          </div>
 
-        {/* Middle Column - Stacked Components */}
-        <div className="flex-1 bg-gray-50 flex flex-col min-h-0">
-          <div className="flex-none">
-            <Mission className="z-40" />
-          </div>
-          <div className="flex-none">
-            <Workflow className="z-30" />
-          </div>
-          <div className="flex-1 overflow-auto relative min-h-0">
-            <Workspace />
-          </div>
-        </div>
+          {/* Main Content Area (cols 4-9) */}
+          <div className="col-span-6 h-full flex flex-col">
+            {/* Mission Header */}
+            <div className="sticky top-14 z-30 bg-white shadow-lg rounded-2xl p-6 mb-6">
+              <Mission />
+            </div>
 
-        {/* Right Column - Assets */}
-        <div className="w-64 bg-white border-l overflow-auto">
-          <Assets />
+            {/* Stage Tracker */}
+            <div className="mb-6">
+              <Workflow />
+            </div>
+
+            {/* Workspace Canvas */}
+            <div className="flex-1 overflow-y-auto">
+              <Workspace />
+            </div>
+          </div>
+
+          {/* Right Assets Rail (cols 10-12) */}
+          <div className="col-span-3 h-full overflow-hidden">
+            <Assets />
+          </div>
         </div>
       </div>
     </div>

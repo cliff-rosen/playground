@@ -41,8 +41,8 @@ interface AssetsProps {
 
 export function Assets({ className = '' }: AssetsProps) {
     return (
-        <div className={`flex flex-col h-full bg-gray-50 ${className}`}>
-            <div className="px-4 py-3 border-b bg-white">
+        <div className={`flex flex-col h-full bg-white/95 ${className}`}>
+            <div className="px-4 py-3 border-b">
                 <h2 className="text-xs font-medium text-gray-500 uppercase tracking-wider">Assets</h2>
             </div>
             <div className="flex-1 overflow-y-auto p-4">
@@ -50,9 +50,9 @@ export function Assets({ className = '' }: AssetsProps) {
                     {assets.map((asset) => (
                         <div
                             key={asset.id}
-                            className="flex items-center p-2 hover:bg-white rounded-lg cursor-pointer group border border-transparent hover:border-gray-200 transition-colors"
+                            className="flex items-center p-2 hover:bg-gray-50 rounded-lg cursor-pointer group"
                         >
-                            <div className="w-8 h-8 rounded bg-white flex items-center justify-center text-gray-600 border border-gray-200">
+                            <div className="w-8 h-8 rounded bg-gray-50 flex items-center justify-center text-gray-600">
                                 {asset.icon}
                             </div>
                             <div className="ml-3 flex-1">

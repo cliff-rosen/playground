@@ -47,8 +47,8 @@ export default function Chat() {
     };
 
     return (
-        <div className="flex flex-col h-full bg-gray-50">
-            <div className="px-4 py-3 border-b bg-white">
+        <div className="flex flex-col h-full bg-white/95">
+            <div className="px-4 py-3 border-b">
                 <h2 className="text-xs font-medium text-gray-500 uppercase tracking-wider">Assistant</h2>
             </div>
             <div className="flex-1 overflow-y-auto p-4 space-y-3">
@@ -58,8 +58,8 @@ export default function Chat() {
                         className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                     >
                         <div
-                            className={`rounded-lg px-4 py-2 max-w-[85%] ${message.sender === 'user'
-                                ? 'bg-indigo-50 text-gray-800 border border-indigo-100'
+                            className={`rounded-xl px-4 py-3 max-w-[85%] ${message.sender === 'user'
+                                ? 'bg-emerald-50 text-gray-800 border-l-4 border-emerald-500'
                                 : 'bg-white text-gray-800 border border-gray-100'
                                 }`}
                         >
