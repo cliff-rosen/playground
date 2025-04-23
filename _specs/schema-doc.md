@@ -10,14 +10,15 @@ FractalBot is a hierarchical workflow orchestration system that breaks down comp
 
 1. **Mission** (Top Level)
    - Represents the overall goal or project
-   - Contains one Workflow
+   - Contains embedded Workflow definition
    - Tracks high-level status and desired outcomes
    - Example: "Create a marketing website for our product"
 
 2. **Workflow** (Organization Level)
-   - Belongs to one Mission
+   - Embedded within Mission
    - Contains multiple ordered Stages
    - Manages shared assets across stages
+   - Inherits Mission's inputs and outputs
    - Example: Website creation workflow with stages for design, development, and deployment
 
 3. **Stage** (Phase Level)
@@ -105,6 +106,7 @@ Let's walk through a practical example of creating a marketing website using Fra
 ### 1. Mission Creation
 ```json
 {
+  "id": "m-123",
   "title": "Create Company Marketing Website",
   "description": "Design and develop a modern marketing website for our AI product",
   "initialInputs": [
@@ -115,87 +117,100 @@ Let's walk through a practical example of creating a marketing website using Fra
     { "type": "Website", "name": "live_marketing_site" },
     { "type": "Document", "name": "deployment_documentation" }
   ],
-  "status": "PendingGoal"
+  "status": "PendingGoal",
+  "workflow": {
+    "inputs": ["brand_guidelines.pdf", "company_logo.svg"],
+    "outputs": ["live_marketing_site", "deployment_documentation"],
+    "stages": [
+      {
+        "id": "s-1",
+        "description": "Design Phase",
+        "inputs": ["brand_guidelines.pdf", "company_logo.svg"],
+        "outputs": ["website_design.figma", "design_specs.md"],
+        "status": "InDesign"
+      },
+      {
+        "id": "s-2",
+        "description": "Development Phase",
+        "inputs": ["website_design.figma", "design_specs.md"],
+        "outputs": ["website_codebase", "test_reports"],
+        "status": "InDesign"
+      },
+      {
+        "id": "s-3",
+        "description": "Deployment Phase",
+        "inputs": ["website_codebase"],
+        "outputs": ["live_marketing_site", "deployment_documentation"],
+        "status": "InDesign"
+      }
+    ],
+    "currentStageIndex": 0,
+    "status": "InDesign"
+  }
 }
 ```
 
-### 2. Workflow Organization
+### 2. Stage Execution Example (Development Phase)
 ```json
 {
-  "stages": [
-    {
-      "description": "Design Phase",
-      "inputs": ["brand_guidelines.pdf", "company_logo.svg"],
-      "outputs": ["website_design.figma", "design_specs.md"]
-    },
-    {
-      "description": "Development Phase",
-      "inputs": ["website_design.figma", "design_specs.md"],
-      "outputs": ["website_codebase", "test_reports"]
-    },
-    {
-      "description": "Deployment Phase",
-      "inputs": ["website_codebase"],
-      "outputs": ["live_marketing_site", "deployment_documentation"]
-    }
-  ]
-}
-```
-
-### 3. Stage Execution Example (Development Phase)
-
-```json
-{
+  "id": "s-2",
+  "description": "Development Phase",
+  "inputs": ["website_design.figma", "design_specs.md"],
+  "outputs": ["website_codebase", "test_reports"],
+  "status": "InProgress",
   "steps": [
     {
+      "id": "step-1",
       "description": "Setup Development Environment",
       "stepType": "Composite",
+      "inputs": ["design_specs.md"],
+      "outputs": ["dev_environment_ready"],
       "substeps": [
         {
+          "id": "step-1.1",
           "description": "Initialize Next.js Project",
           "tool": "next-cli",
-          "stepType": "Atomic"
+          "stepType": "Atomic",
+          "inputs": ["design_specs.md"],
+          "outputs": ["next_project"]
         },
         {
+          "id": "step-1.2",
           "description": "Configure TailwindCSS",
           "tool": "npm-install",
-          "stepType": "Atomic"
+          "stepType": "Atomic",
+          "inputs": ["next_project"],
+          "outputs": ["dev_environment_ready"]
         }
       ]
     },
     {
+      "id": "step-2",
       "description": "Implement Core Components",
       "stepType": "Composite",
+      "inputs": ["website_design.figma", "dev_environment_ready"],
+      "outputs": ["core_components"],
       "substeps": [
         {
+          "id": "step-2.1",
           "description": "Create Hero Section",
           "tool": "react-component-generator",
-          "stepType": "Atomic"
+          "stepType": "Atomic",
+          "inputs": ["website_design.figma"],
+          "outputs": ["hero_component"]
         },
         {
+          "id": "step-2.2",
           "description": "Build Navigation",
           "tool": "react-component-generator",
-          "stepType": "Atomic"
-        }
-      ]
-    },
-    {
-      "description": "Quality Assurance",
-      "stepType": "Composite",
-      "substeps": [
-        {
-          "description": "Run Unit Tests",
-          "tool": "jest-runner",
-          "stepType": "Atomic"
-        },
-        {
-          "description": "Perform Accessibility Check",
-          "tool": "a11y-checker",
-          "stepType": "Atomic"
+          "stepType": "Atomic",
+          "inputs": ["website_design.figma"],
+          "outputs": ["nav_component"]
         }
       ]
     }
-  ]
+  ],
+  "currentStepIndex": 0
 }
 ```
 

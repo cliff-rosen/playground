@@ -7,19 +7,18 @@
 | id | UUID | Unique identifier |
 | title | String | Clear identifier for the overall goal |
 | description | String | Detailed explanation of what needs to be accomplished |
-| initialInputs | Array[Asset] | Starting resources provided by the user |
-| desiredOutputs | Array[Asset] | Definition of the final deliverable(s) |
+| assets | Map[String, Asset] | All assets used in this mission |
 | status | Enum | [InDesign, PendingGoal, PendingWorkflowStageDesign, InProgress, Completed, Failed] |
+| workflow | Workflow | Embedded workflow definition |
 
 ## Workflow Table
 
 | Field | Type | Description |
 |-------|------|-------------|
-| id | UUID | Unique identifier |
-| missionId | UUID | Reference to parent mission |
+| inputAssetRefs | Array[String] | References to mission assets required to start |
+| outputAssetRefs | Array[String] | References to mission assets that will be produced |
 | stages | Array[Stage] | Ordered list of major transformation phases |
 | currentStageIndex | Integer | Tracks execution progress |
-| assets | Map[String, Asset] | Shared resource space across all stages |
 | status | Enum | [InDesign, InProgress, Completed, Failed] |
 
 ## Stage Table
@@ -28,8 +27,8 @@
 |-------|------|-------------|
 | id | UUID | Unique identifier |
 | description | String | Purpose of this transformation phase |
-| inputs | Array[AssetReference] | Required resources to begin this stage |
-| outputs | Array[AssetReference] | Expected products of this stage |
+| inputAssetRefs | Array[String] | References to mission assets required to begin this stage |
+| outputAssetRefs | Array[String] | References to mission assets that will be produced by this stage |
 | steps | Array[Step] | Ordered list of execution units |
 | currentStepIndex | Integer | Tracks execution progress |
 | status | Enum | [InDesign, InProgress, Completed, Failed] |
@@ -40,8 +39,8 @@
 |-------|------|-------------|
 | id | UUID | Unique identifier |
 | description | String | Purpose of this execution unit |
-| inputs | Array[AssetReference] | Required resources for execution |
-| outputs | Array[AssetReference] | Expected products of execution |
+| inputAssetRefs | Array[String] | References to mission assets required for execution |
+| outputAssetRefs | Array[String] | References to mission assets that will be produced by this step |
 | stepType | Enum | [Atomic, Composite] - Whether step uses a tool directly or contains substeps |
 | tool | ToolReference | Reference to executing tool (if atomic) |
 | substeps | Array[Step] | Nested steps for fractal expansion (if composite) |
