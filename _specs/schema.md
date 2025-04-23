@@ -31,7 +31,7 @@
 | outputAssetRefs | Array[String] | References to mission assets that will be produced by this stage |
 | steps | Array[Step] | Ordered list of execution units |
 | currentStepIndex | Integer | Tracks execution progress |
-| status | Enum | [InDesign, InProgress, Completed, Failed] |
+| status | Enum | [InDesign, Ready, InProgress, Completed, Failed] |
 
 ## Step Table
 
@@ -45,7 +45,7 @@
 | tool | ToolReference | Reference to executing tool (if atomic) |
 | substeps | Array[Step] | Nested steps for fractal expansion (if composite) |
 | parentId | UUID | Reference to parent step if nested (optional) |
-| status | Enum | [InDesign, InProgress, Completed, Failed] |
+| status | Enum | [InDesign, Ready, InProgress, Completed, Failed] |
 | isResolved | Boolean | Whether the step's tree terminates in steps with assigned tools |
 
 ## Tool Table
