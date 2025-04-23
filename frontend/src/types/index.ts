@@ -85,6 +85,8 @@ export type Mission = {
     status: Status;
     workflow: Workflow;
     assets: Asset[];
+    inputs: string[]; // Asset IDs
+    outputs: string[]; // Asset IDs
     createdAt: string;
     updatedAt: string;
 }

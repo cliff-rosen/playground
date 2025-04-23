@@ -169,6 +169,8 @@ export const mockMission: Mission = {
     status: 'current',
     workflow: mockWorkflow,
     assets: mockAssets,
+    inputs: ['asset-1'],
+    outputs: ['asset-2'],
     createdAt: '2024-01-01T00:00:00Z',
     updatedAt: '2024-01-02T02:00:00Z'
 };
