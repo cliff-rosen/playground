@@ -19,6 +19,7 @@ const newStep: Step = {
 };
 
 const stages = baseWorkflow?.stages || [];
+stages[0].status = 'current';
 stages[0].steps.push(newStep);
 
 const workflow: Workflow = {

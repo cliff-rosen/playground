@@ -36,7 +36,10 @@ export default function App() {
 
             {/* Stage Tracker */}
             <div className="mb-6">
-              <Workflow workflow={mockDataSnapshots[currentDataSnapshotIdx].mission.workflow} />
+              <Workflow
+                workflow={mockDataSnapshots[currentDataSnapshotIdx].mission.workflow}
+                workspaceState={mockDataSnapshots[currentDataSnapshotIdx].workspaceState}
+              />
             </div>
 
             {/* Workspace Canvas */}
