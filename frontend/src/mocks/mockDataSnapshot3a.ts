@@ -38,12 +38,19 @@ const deltas: Partial<MockDataSnapshot> = {
         {
             id: 'msg-3b',
             role: 'assistant' as const,
-            content: "bla bla",
+            content: "OK, let's proceed with that plan. Let me analyze the first stage of the workflow and find a good tool for the initial step.",
             timestamp: '2024-01-01T00:03:00Z',
             metadata: {
                 stageId: 'stage-1',
                 stepId: 'step-1-1'
             }
+        },
+        {
+            id: 'msg-3c',
+            role: 'assistant' as const,
+            content: "Thinking...",
+            timestamp: '2024-01-01T00:03:00Z',
+
         }
     ],
     workspace: {

@@ -53,7 +53,7 @@ const deltas: Partial<MockDataSnapshot> = {
         {
             id: 'msg-4',
             role: 'assistant' as const,
-            content: "I'll start by querying the customer feedback database. This will fetch all the relevant feedback data for analysis.",
+            content: "OK, for the first step, I think we should query the customer feedback database using the 'Query Database' tool. This will fetch all the relevant feedback data for analysis. I've proposed that step in the workspace. If you accept it, the change will get applied to the workflow and executer right away. Would you like me to proceed with this plan?",
             timestamp: '2024-01-01T00:03:00Z',
             metadata: {
                 stageId: 'stage-1',
