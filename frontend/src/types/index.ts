@@ -12,6 +12,8 @@ export type Workspace = {
     status: Status;
     content?: {
         text?: string;
+        mission?: Mission;
+        workflow?: Workflow;
         assets?: Asset[];
     };
     actionButtons?: {

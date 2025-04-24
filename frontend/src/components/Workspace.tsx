@@ -1,6 +1,8 @@
 import React from 'react';
 import { FileText, AlertCircle, CheckCircle2, Clock } from 'lucide-react';
 import type { Workspace } from '../types/index';
+import ProposedMission from './ProposedMission';
+import ProposedWorkflow from './ProposedWorkflow';
 
 interface WorkspaceViewProps {
     workspace: Workspace;
@@ -46,6 +48,36 @@ export default function WorkspaceView({ workspace }: WorkspaceViewProps) {
         }
     };
 
+    const renderContent = () => {
+        if (!workspace.content) return null;
+
+        switch (workspace.type) {
+            case 'proposedMission':
+                if (workspace.content.mission) {
+                    return <ProposedMission mission={workspace.content.mission} />;
+                }
+                break;
+            case 'proposedWorkflowDesign':
+                if (workspace.content.workflow) {
+                    return <ProposedWorkflow workflow={workspace.content.workflow} />;
+                }
+                break;
+            case 'workflowStepStatus':
+            case 'extractionResult':
+            case 'analysisResult':
+                if (workspace.content.text) {
+                    return (
+                        <div className="mb-4">
+                            <p className="text-gray-600 whitespace-pre-wrap">{workspace.content.text}</p>
+                        </div>
+                    );
+                }
+                break;
+        }
+
+        return null;
+    };
+
     return (
         <div className="bg-white rounded-2xl shadow">
             {/* Header */}
@@ -66,11 +98,7 @@ export default function WorkspaceView({ workspace }: WorkspaceViewProps) {
 
             {/* Content Area */}
             <div className="p-6">
-                {workspace.content?.text && (
-                    <div className="mb-4">
-                        <p className="text-gray-600 whitespace-pre-wrap">{workspace.content.text}</p>
-                    </div>
-                )}
+                {renderContent()}
 
                 {workspace.content?.assets && workspace.content.assets.length > 0 ? (
                     <div className="grid grid-cols-2 gap-4">

@@ -1,4 +1,8 @@
 import { Mission, Stage, Step, Asset, ChatMessage, Workspace, Workflow } from '../types';
+import { mockDataSnapshot0 } from './mockDataSnapshot0';
+import { mockDataSnapshot1 } from './mockDataSnapshot1';
+import { mockDataSnapshot2 } from './mockDataSnapshot2';
+import { mockDataSnapshot3 } from './mockDataSnapshot3';
 
 // Mock data snapshot type
 export type MockDataSnapshot = {
@@ -237,62 +241,8 @@ export const mockWorkspace: Workspace =
     updatedAt: '2024-03-20T12:00:00Z'
 }
 
-
-// Empty mock data snapshot
-export const mockDataSnapshot0: MockDataSnapshot = {
-    mission: {
-        id: '',
-        title: '',
-        description: '',
-        goal: '',
-        status: 'pending',
-        workflow: {
-            id: '',
-            name: '',
-            description: '',
-            status: 'pending',
-            stages: [],
-            assets: [],
-            createdAt: '',
-            updatedAt: ''
-        },
-        assets: [],
-        inputs: [],
-        outputs: [],
-        createdAt: '',
-        updatedAt: ''
-    },
-    workflow: {
-        id: '',
-        name: '',
-        description: '',
-        status: 'pending',
-        stages: [],
-        assets: [],
-        createdAt: '',
-        updatedAt: ''
-    },
-    stages: [],
-    steps: [],
-    assets: [],
-    chatMessages: [],
-    workspace: {
-        id: '',
-        type: 'workflowStepStatus',
-        title: '',
-        status: 'pending',
-        content: {
-            text: '',
-            assets: []
-        },
-        actionButtons: [],
-        createdAt: '',
-        updatedAt: ''
-    }
-};
-
 // Complete mock data snapshot
-export const mockDataSnapshot: MockDataSnapshot = {
+export const mockDataSnapshotSample: MockDataSnapshot = {
     mission: mockMission,
     workflow: mockWorkflow,
     stages: mockStages,
@@ -302,6 +252,5 @@ export const mockDataSnapshot: MockDataSnapshot = {
     workspace: mockWorkspace
 };
 
-
 // Array of mock data snapshots
-export const mockDataSnapshots: MockDataSnapshots = [mockDataSnapshot0, mockDataSnapshot];
+export const mockDataSnapshots: MockDataSnapshots = [mockDataSnapshot0, mockDataSnapshot1, mockDataSnapshot2, mockDataSnapshot3];
