@@ -2,6 +2,8 @@ import { Mission, Stage, Step, Asset, ChatMessage, Workspace, Workflow, Workspac
 import { mockDataSnapshot0 } from './mockDataSnapshot0';
 import { mockDataSnapshot1 } from './mockDataSnapshot1';
 import { mockDataSnapshot2 } from './mockDataSnapshot2';
+import { mockDataSnapshot2a } from './mockDataSnapshot2a';
+import { mockDataSnapshot2b } from './mockDataSnapshot2b';
 import { mockDataSnapshot3 } from './mockDataSnapshot3';
 import { mockDataSnapshot4 } from './mockDataSnapshot4';
 
@@ -19,6 +21,20 @@ export type MockDataSnapshot = {
 
 // Array of mock data snapshots type
 export type MockDataSnapshots = MockDataSnapshot[];
+
+export const mockThinkingWorkspace: Workspace = {
+    id: 'ws-1',
+    type: 'thinking',
+    title: 'Thinking...',
+    status: 'pending',
+    content: {
+        text: "Thinking..."
+    },
+    actionButtons: [
+    ],
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-01T00:00:00Z',
+}
 
 export const mockAssets: Asset[] = [
     {
@@ -267,4 +283,4 @@ export const mockDataSnapshotSample: MockDataSnapshot = {
 };
 
 // Array of mock data snapshots
-export const mockDataSnapshots: MockDataSnapshots = [mockDataSnapshot0, mockDataSnapshot1, mockDataSnapshot2, mockDataSnapshot3, mockDataSnapshot4];
+export const mockDataSnapshots: MockDataSnapshots = [mockDataSnapshot0, mockDataSnapshot1, mockDataSnapshot2, mockDataSnapshot2a, mockDataSnapshot2b, mockDataSnapshot3, mockDataSnapshot4];

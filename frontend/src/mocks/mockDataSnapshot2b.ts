@@ -1,9 +1,16 @@
 import { Mission, Stage, Step, Asset, ChatMessage, Workspace, Workflow, WorkspaceState } from '../types';
 import { MockDataSnapshot } from './data';
-import { mockDataSnapshot2b } from './mockDataSnapshot2b';
+import { mockDataSnapshot2a } from './mockDataSnapshot2a';
+import { mockThinkingWorkspace } from './data';
 
 // Base state
-const baseState = mockDataSnapshot2b;
+const baseState = mockDataSnapshot2a;
+
+// Mission data (moved from workspace to main mission)
+var mission: Mission | undefined = baseState.workspace.content?.mission;
+if (mission) {
+    mission.status = 'current';
+}
 
 // Proposed workflow for the workspace
 const proposedWorkflow: Workflow = {
@@ -59,35 +66,32 @@ const proposedWorkflow: Workflow = {
 
 // Deltas from base state
 const deltas: Partial<MockDataSnapshot> = {
+    mission,
     chatMessages: [
         ...baseState.chatMessages,
         {
-            id: 'msg-3',
+            id: 'msg-2b1',
             role: 'assistant' as const,
-            content: "Great! I've designed a workflow with three stages: Search, Extract, and Generate. Here's the proposed workflow structure. Would you like me to proceed with this plan?",
+            content: "Great! Let me design a workflow for you.",
+            timestamp: '2024-01-01T00:02:00Z',
+            metadata: {}
+        },
+        {
+            id: 'msg-2b2',
+            role: 'assistant' as const,
+            content: "Thinking...",
             timestamp: '2024-01-01T00:02:00Z',
             metadata: {}
         }
     ],
     workspace: {
         ...baseState.workspace,
-        type: 'proposedWorkflowDesign',
-        title: 'Proposed Workflow',
+        type: 'thinking',
+        title: 'Thinking...',
         content: {
-            workflow: proposedWorkflow,
-            assets: []
+            text: "Thinking..."
         },
         actionButtons: [
-            {
-                label: 'Accept',
-                onClick: () => console.log('Accept workflow'),
-                variant: 'primary'
-            },
-            {
-                label: 'Modify',
-                onClick: () => console.log('Modify workflow'),
-                variant: 'secondary'
-            }
         ],
         updatedAt: '2024-01-01T00:02:00Z'
     },
@@ -98,7 +102,7 @@ const deltas: Partial<MockDataSnapshot> = {
 };
 
 // Final state
-export const mockDataSnapshot3: MockDataSnapshot = {
+export const mockDataSnapshot2b: MockDataSnapshot = {
     ...baseState,
     ...deltas
 }; 

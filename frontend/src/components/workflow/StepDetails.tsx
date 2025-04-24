@@ -10,10 +10,6 @@ interface StepDetailsProps {
 export default function StepDetails({ step }: StepDetailsProps) {
     return (
         <div className="space-y-4">
-            <div>
-                <h2 className="text-lg font-medium text-gray-900">{step.name}</h2>
-                <p className="mt-1 text-sm text-gray-600">{step.description}</p>
-            </div>
 
             {step.tool && (
                 <div className="bg-gray-50 p-4 rounded-lg">

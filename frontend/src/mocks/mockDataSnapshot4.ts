@@ -15,7 +15,14 @@ const newStep: Step = {
     status: 'current',
     assets: { inputs: [], outputs: [] },
     createdAt: '2024-01-01T00:00:00Z',
-    updatedAt: '2024-01-01T00:00:00Z'
+    updatedAt: '2024-01-01T00:00:00Z',
+    tool: {
+        name: 'Query Database',
+        configuration: {
+            database: 'customer_feedback',
+            query: 'SELECT * FROM feedback'
+        }
+    }
 };
 
 const stages = baseWorkflow?.stages || [];

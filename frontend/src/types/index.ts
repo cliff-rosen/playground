@@ -3,7 +3,7 @@ export type Status = 'completed' | 'current' | 'pending' | 'failed';
 export type AssetStatus = 'pendingCompletion' | 'pendingApproval' | 'ready' | 'archived' | 'error';
 
 // Workspace types
-export type WorkspaceType = 'proposedMission' | 'proposedWorkflowDesign' | 'workflowStepStatus' | 'stepDetails';
+export type WorkspaceType = 'proposedMission' | 'proposedWorkflowDesign' | 'workflowStepStatus' | 'stepDetails' | 'thinking';
 
 export type Workspace = {
     id: string;

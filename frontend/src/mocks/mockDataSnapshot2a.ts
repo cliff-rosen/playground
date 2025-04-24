@@ -1,9 +1,9 @@
 import { Mission, Stage, Step, Asset, ChatMessage, Workspace, Workflow, WorkspaceState } from '../types';
 import { MockDataSnapshot } from './data';
-import { mockDataSnapshot1 } from './mockDataSnapshot1';
+import { mockDataSnapshot2 } from './mockDataSnapshot2';
 
 // Base state
-const baseState = mockDataSnapshot1;
+const baseState = mockDataSnapshot2;
 
 // Mission proposal data
 const missionProposal: Mission = {
@@ -29,38 +29,41 @@ const missionProposal: Mission = {
     updatedAt: '2024-01-01T00:00:00Z'
 };
 
-const mockThinkingWorkspace: Workspace = {
-    ...baseState.workspace,
-    type: 'thinking',
-    title: 'Thinking...',
-    content: {
-        text: "Thinking..."
-    },
-    actionButtons: [],
-    createdAt: '2024-01-01T00:00:00Z',
-    updatedAt: '2024-01-01T00:00:00Z'
-};
-
 // Deltas from base state
 const deltas: Partial<MockDataSnapshot> = {
     chatMessages: [
         ...baseState.chatMessages,
         {
-            id: 'msg-2',
+            id: 'msg-2a1',
             role: 'assistant' as const,
-            content: "I'll help you analyze the customer feedback. Let's start by clarifying the mission. Give me a moment to create a proposed mission based on your request.",
-            timestamp: '2024-01-01T00:01:00Z',
-            metadata: {}
-        },
-        {
-            id: 'msg-2a',
-            role: 'assistant' as const,
-            content: "Thinking...",
+            content: "Have a look at this proposed mission and then let me know if you want to accept or modify it.",
             timestamp: '2024-01-01T00:02:00Z',
             metadata: {}
         }
     ],
-    workspace: mockThinkingWorkspace,
+    workspace: {
+        ...baseState.workspace,
+        type: 'proposedMission',
+        title: 'Proposed Mission',
+        content: {
+            mission: missionProposal,
+            assets: []
+        },
+        status: 'pending',
+        actionButtons: [
+            {
+                label: 'Accept',
+                onClick: () => console.log('Accept mission'),
+                variant: 'primary'
+            },
+            {
+                label: 'Modify',
+                onClick: () => console.log('Modify mission'),
+                variant: 'secondary'
+            }
+        ],
+        updatedAt: '2024-01-01T00:01:00Z'
+    },
     workspaceState: {
         ...baseState.workspaceState,
         currentMissionId: 'mission-1'
@@ -68,7 +71,7 @@ const deltas: Partial<MockDataSnapshot> = {
 };
 
 // Final state
-export const mockDataSnapshot2: MockDataSnapshot = {
+export const mockDataSnapshot2a: MockDataSnapshot = {
     ...baseState,
     ...deltas
 }; 
