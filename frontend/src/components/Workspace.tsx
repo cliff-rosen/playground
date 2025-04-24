@@ -3,6 +3,7 @@ import { FileText, AlertCircle, CheckCircle2, Clock } from 'lucide-react';
 import type { Workspace } from '../types/index';
 import ProposedMission from './ProposedMission';
 import ProposedWorkflow from './ProposedWorkflow';
+import StepDetails from './workflow/StepDetails';
 
 interface WorkspaceViewProps {
     workspace: Workspace;
@@ -13,10 +14,10 @@ export default function WorkspaceView({ workspace }: WorkspaceViewProps) {
         switch (status) {
             case 'completed':
                 return <CheckCircle2 className="w-5 h-5 text-emerald-500" />;
+            case 'current':
+                return <Clock className="w-5 h-5 text-blue-500" />;
             case 'failed':
                 return <AlertCircle className="w-5 h-5 text-red-500" />;
-            case 'pending':
-                return <Clock className="w-5 h-5 text-blue-500" />;
             default:
                 return <FileText className="w-5 h-5 text-gray-400" />;
         }
@@ -28,7 +29,7 @@ export default function WorkspaceView({ workspace }: WorkspaceViewProps) {
                 return 'Completed';
             case 'failed':
                 return 'Failed';
-            case 'pending':
+            case 'current':
                 return 'In Progress';
             default:
                 return 'Unknown status';
@@ -41,7 +42,7 @@ export default function WorkspaceView({ workspace }: WorkspaceViewProps) {
                 return 'text-emerald-700 bg-emerald-100';
             case 'failed':
                 return 'text-red-700 bg-red-100';
-            case 'pending':
+            case 'current':
                 return 'text-blue-700 bg-blue-100';
             default:
                 return 'text-gray-700 bg-gray-100';
@@ -62,8 +63,12 @@ export default function WorkspaceView({ workspace }: WorkspaceViewProps) {
                     return <ProposedWorkflow workflow={workspace.content.workflow} />;
                 }
                 break;
-            case 'workflowStepStatus':
             case 'stepDetails':
+                if (workspace.content.step) {
+                    return <StepDetails step={workspace.content.step} />;
+                }
+                break;
+            case 'workflowStepStatus':
                 if (workspace.content.text) {
                     return (
                         <div className="mb-4">
@@ -99,8 +104,8 @@ export default function WorkspaceView({ workspace }: WorkspaceViewProps) {
             <div className="p-6">
                 {renderContent()}
 
-                {workspace.content?.assets && workspace.content.assets.length > 0 ? (
-                    <div className="grid grid-cols-2 gap-4">
+                {workspace.content?.assets && workspace.content.assets.length > 0 && (
+                    <div className="grid grid-cols-2 gap-4 mt-6">
                         {workspace.content.assets.map(asset => (
                             <div key={asset.id} className="p-4 bg-gray-50 rounded-lg">
                                 <div className="flex items-center space-x-3">
@@ -112,13 +117,6 @@ export default function WorkspaceView({ workspace }: WorkspaceViewProps) {
                                 </div>
                             </div>
                         ))}
-                    </div>
-                ) : (
-                    <div className="flex flex-col items-center justify-center min-h-[200px] bg-gray-50 rounded-lg">
-                        <div className="w-16 h-16 rounded-lg bg-white flex items-center justify-center mb-4">
-                            <FileText className="w-8 h-8 text-gray-400" />
-                        </div>
-                        <p className="text-sm text-gray-500">No assets available</p>
                     </div>
                 )}
             </div>

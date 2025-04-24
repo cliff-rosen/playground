@@ -60,7 +60,7 @@ const deltas: Partial<MockDataSnapshot> = {
         ...baseState.workspace,
         type: 'stepDetails',
         title: 'Query Database',
-        content: {},
+        content: { step: newStep },
         actionButtons: [
             {
                 label: 'Execute',
