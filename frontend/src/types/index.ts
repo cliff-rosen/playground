@@ -14,6 +14,12 @@ export type Workspace = {
         text?: string;
         assets?: Asset[];
     };
+    actionButtons?: {
+        label: string;
+        onClick: () => void;
+        variant?: 'primary' | 'secondary' | 'danger';
+        disabled?: boolean;
+    }[];
     createdAt: string;
     updatedAt: string;
 }

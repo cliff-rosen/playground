@@ -1,5 +1,19 @@
 import { Mission, Stage, Step, Asset, ChatMessage, Workspace, Workflow } from '../types';
 
+// Mock data snapshot type
+export type MockDataSnapshot = {
+    mission: Mission;
+    workflow: Workflow;
+    stages: Stage[];
+    steps: Step[];
+    assets: Asset[];
+    chatMessages: ChatMessage[];
+    workspace: Workspace;
+}
+
+// Array of mock data snapshots type
+export type MockDataSnapshots = MockDataSnapshot[];
+
 export const mockAssets: Asset[] = [
     {
         id: 'asset-1',
@@ -197,53 +211,97 @@ export const mockChatMessages: ChatMessage[] = [
     }
 ];
 
-export const mockWorkspaces: Workspace[] = [
-    {
-        id: 'ws-1',
+export const mockWorkspace: Workspace =
+{
+    id: 'ws-1',
+    type: 'workflowStepStatus',
+    title: 'Extraction in Progress',
+    status: 'pending',
+    content: {
+        text: 'Extracting data from input documents...',
+        assets: []
+    },
+    actionButtons: [
+        {
+            label: 'Cancel',
+            onClick: () => console.log('Cancel extraction'),
+            variant: 'danger'
+        },
+        {
+            label: 'Complete',
+            onClick: () => console.log('Complete extraction'),
+            variant: 'primary'
+        }
+    ],
+    createdAt: '2024-03-20T12:00:00Z',
+    updatedAt: '2024-03-20T12:00:00Z'
+}
+
+
+// Empty mock data snapshot
+export const mockDataSnapshot0: MockDataSnapshot = {
+    mission: {
+        id: '',
+        title: '',
+        description: '',
+        goal: '',
+        status: 'pending',
+        workflow: {
+            id: '',
+            name: '',
+            description: '',
+            status: 'pending',
+            stages: [],
+            assets: [],
+            createdAt: '',
+            updatedAt: ''
+        },
+        assets: [],
+        inputs: [],
+        outputs: [],
+        createdAt: '',
+        updatedAt: ''
+    },
+    workflow: {
+        id: '',
+        name: '',
+        description: '',
+        status: 'pending',
+        stages: [],
+        assets: [],
+        createdAt: '',
+        updatedAt: ''
+    },
+    stages: [],
+    steps: [],
+    assets: [],
+    chatMessages: [],
+    workspace: {
+        id: '',
         type: 'workflowStepStatus',
-        title: 'Extraction in Progress',
+        title: '',
         status: 'pending',
         content: {
-            text: 'Extracting data from input documents...',
+            text: '',
             assets: []
         },
-        createdAt: '2024-03-20T12:00:00Z',
-        updatedAt: '2024-03-20T12:00:00Z'
-    },
-    {
-        id: 'ws-2',
-        type: 'proposedWorkflowDesign',
-        title: 'Proposed Workflow Design',
-        status: 'completed',
-        content: {
-            text: 'Analysis of current workflow and proposed improvements...',
-            assets: []
-        },
-        createdAt: '2024-03-20T11:30:00Z',
-        updatedAt: '2024-03-20T11:45:00Z'
-    },
-    {
-        id: 'ws-3',
-        type: 'extractionResult',
-        title: 'Document Extraction Results',
-        status: 'failed',
-        content: {
-            text: 'Failed to extract data from corrupted document...',
-            assets: []
-        },
-        createdAt: '2024-03-20T10:15:00Z',
-        updatedAt: '2024-03-20T10:30:00Z'
-    },
-    {
-        id: 'ws-4',
-        type: 'analysisResult',
-        title: 'Data Analysis Report',
-        status: 'completed',
-        content: {
-            text: 'Analysis of extracted data patterns and insights...',
-            assets: []
-        },
-        createdAt: '2024-03-20T09:00:00Z',
-        updatedAt: '2024-03-20T09:45:00Z'
+        actionButtons: [],
+        createdAt: '',
+        updatedAt: ''
     }
-]; 
+};
+
+// Complete mock data snapshot
+export const mockDataSnapshot: MockDataSnapshot = {
+    mission: mockMission,
+    workflow: mockWorkflow,
+    stages: mockStages,
+    steps: mockSteps,
+    assets: mockAssets,
+    chatMessages: mockChatMessages,
+    workspace: mockWorkspace
+};
+
+
+// Array of mock data snapshots
+export const mockDataSnapshots: MockDataSnapshots = [mockDataSnapshot0, mockDataSnapshot];

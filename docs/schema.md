@@ -115,11 +115,21 @@ type Workspace = {
         text?: string;
         assets?: Asset[];
     };
+    actionButtons?: {
+        label: string;
+        onClick: () => void;
+        variant?: 'primary' | 'secondary' | 'danger';
+        disabled?: boolean;
+    }[];
     createdAt: string;
     updatedAt: string;
 }
 ```
-Represents a workspace that can contain various types of content and assets.
+Represents a workspace that can contain various types of content and assets. The `actionButtons` array defines the buttons that appear at the bottom of the workspace, each with:
+- `label`: The text displayed on the button
+- `onClick`: The function to call when the button is clicked
+- `variant`: Optional button style ('primary', 'secondary', or 'danger')
+- `disabled`: Optional flag to disable the button
 
 ### WorkspaceType
 ```typescript
