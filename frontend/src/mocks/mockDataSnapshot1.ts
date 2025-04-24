@@ -1,4 +1,4 @@
-import { Mission, Stage, Step, Asset, ChatMessage, Workspace, Workflow } from '../types';
+import { Mission, Stage, Step, Asset, ChatMessage, Workspace, Workflow, WorkspaceState } from '../types';
 import { MockDataSnapshot } from './data';
 import { mockDataSnapshot0 } from './mockDataSnapshot0';
 
@@ -15,7 +15,10 @@ const deltas: Partial<MockDataSnapshot> = {
             timestamp: '2024-01-01T00:00:00Z',
             metadata: {}
         }
-    ]
+    ],
+    workspaceState: {
+        ...baseState.workspaceState
+    }
 };
 
 // Final state

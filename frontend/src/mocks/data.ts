@@ -1,4 +1,4 @@
-import { Mission, Stage, Step, Asset, ChatMessage, Workspace, Workflow } from '../types';
+import { Mission, Stage, Step, Asset, ChatMessage, Workspace, Workflow, WorkspaceState } from '../types';
 import { mockDataSnapshot0 } from './mockDataSnapshot0';
 import { mockDataSnapshot1 } from './mockDataSnapshot1';
 import { mockDataSnapshot2 } from './mockDataSnapshot2';
@@ -14,6 +14,7 @@ export type MockDataSnapshot = {
     assets: Asset[];
     chatMessages: ChatMessage[];
     workspace: Workspace;
+    workspaceState: WorkspaceState;
 }
 
 // Array of mock data snapshots type
@@ -242,6 +243,17 @@ export const mockWorkspace: Workspace =
     updatedAt: '2024-03-20T12:00:00Z'
 }
 
+export const mockWorkspaceState: WorkspaceState = {
+    currentMissionId: 'mission-1',
+    currentStageId: 'stage-2',
+    currentStepPath: ['step-2-1', 'step-2-2'],
+    viewMode: 'expanded',
+    getCurrentPath: () => ({
+        missionId: 'mission-1',
+        stageId: 'stage-2',
+        stepPath: ['step-2-1', 'step-2-2']
+    })
+};
 // Complete mock data snapshot
 export const mockDataSnapshotSample: MockDataSnapshot = {
     mission: mockMission,
@@ -250,7 +262,8 @@ export const mockDataSnapshotSample: MockDataSnapshot = {
     steps: mockSteps,
     assets: mockAssets,
     chatMessages: mockChatMessages,
-    workspace: mockWorkspace
+    workspace: mockWorkspace,
+    workspaceState: mockWorkspaceState
 };
 
 // Array of mock data snapshots

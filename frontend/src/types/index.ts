@@ -115,10 +115,10 @@ export type ChatMessage = {
 
 // Workspace types
 export type WorkspaceState = {
-    currentMission: Mission | null;
-    currentStage: Stage | null;
-    currentStep: Step | null;
-    selectedAsset: Asset | null;
-    chatHistory: ChatMessage[];
+    currentMissionId: string | null;
+    currentStageId: string | null;
+    // Array of step IDs representing the path through the step hierarchy
+    // First element is the top-level step, last element is the current step
+    currentStepPath: string[];
     viewMode: 'compact' | 'expanded';
 } 

@@ -1,4 +1,4 @@
-import { Mission, Stage, Step, Asset, ChatMessage, Workspace, Workflow } from '../types';
+import { Mission, Stage, Step, Asset, ChatMessage, Workspace, Workflow, WorkspaceState } from '../types';
 import { MockDataSnapshot } from './data';
 import { mockDataSnapshot3 } from './mockDataSnapshot3';
 
@@ -6,131 +6,29 @@ import { mockDataSnapshot3 } from './mockDataSnapshot3';
 const baseState = mockDataSnapshot3;
 
 // Workflow data (moved from workspace to mission)
-var workflow: Workflow | undefined = baseState.mission.workflow;
-workflow = {
-    ...workflow,
-    id: 'workflow-1',
-    name: 'Customer Feedback Analysis Workflow',
-    description: 'Standard workflow for analyzing customer feedback',
+const baseWorkflow = baseState.workspace.content?.workflow;
+
+const newStep: Step = {
+    id: 'step-1-1',
+    name: 'Query Database',
+    description: 'Query the customer feedback database',
     status: 'current',
-    stages: [
-        {
-            id: 'stage-1',
-            name: 'Search',
-            description: 'Search and filter customer feedback',
-            status: 'current',
-            steps: [
-                {
-                    id: 'step-1-1',
-                    name: 'Query database',
-                    description: 'Fetch customer feedback data from the database',
-                    status: 'current',
-                    assets: {
-                        inputs: [],
-                        outputs: []
-                    },
-                    createdAt: '2024-01-01T00:00:00Z',
-                    updatedAt: '2024-01-01T00:00:00Z'
-                },
-                {
-                    id: 'step-1-2',
-                    name: 'Filter relevant entries',
-                    description: 'Filter out irrelevant feedback entries',
-                    status: 'pending',
-                    assets: {
-                        inputs: [],
-                        outputs: []
-                    },
-                    createdAt: '2024-01-01T00:00:00Z',
-                    updatedAt: '2024-01-01T00:00:00Z'
-                }
-            ],
-            assets: {
-                inputs: [],
-                outputs: []
-            },
-            createdAt: '2024-01-01T00:00:00Z',
-            updatedAt: '2024-01-01T00:00:00Z'
-        },
-        {
-            id: 'stage-2',
-            name: 'Extract',
-            description: 'Extract and analyze feedback data',
-            status: 'pending',
-            steps: [
-                {
-                    id: 'step-2-1',
-                    name: 'Parse data',
-                    description: 'Parse the feedback data into a structured format',
-                    status: 'pending',
-                    assets: {
-                        inputs: [],
-                        outputs: []
-                    },
-                    createdAt: '2024-01-01T00:00:00Z',
-                    updatedAt: '2024-01-01T00:00:00Z'
-                },
-                {
-                    id: 'step-2-2',
-                    name: 'Validate format',
-                    description: 'Validate the parsed data format',
-                    status: 'pending',
-                    assets: {
-                        inputs: [],
-                        outputs: []
-                    },
-                    createdAt: '2024-01-01T00:00:00Z',
-                    updatedAt: '2024-01-01T00:00:00Z'
-                }
-            ],
-            assets: {
-                inputs: [],
-                outputs: []
-            },
-            createdAt: '2024-01-01T00:00:00Z',
-            updatedAt: '2024-01-01T00:00:00Z'
-        },
-        {
-            id: 'stage-3',
-            name: 'Generate',
-            description: 'Generate insights from the analyzed data',
-            status: 'pending',
-            steps: [
-                {
-                    id: 'step-3-1',
-                    name: 'Generate insights',
-                    description: 'Generate key insights from the analyzed data',
-                    status: 'pending',
-                    assets: {
-                        inputs: [],
-                        outputs: []
-                    },
-                    createdAt: '2024-01-01T00:00:00Z',
-                    updatedAt: '2024-01-01T00:00:00Z'
-                },
-                {
-                    id: 'step-3-2',
-                    name: 'Create report',
-                    description: 'Create a report with the generated insights',
-                    status: 'pending',
-                    assets: {
-                        inputs: [],
-                        outputs: []
-                    },
-                    createdAt: '2024-01-01T00:00:00Z',
-                    updatedAt: '2024-01-01T00:00:00Z'
-                }
-            ],
-            assets: {
-                inputs: [],
-                outputs: []
-            },
-            createdAt: '2024-01-01T00:00:00Z',
-            updatedAt: '2024-01-01T00:00:00Z'
-        }
-    ],
-    assets: [],
+    assets: { inputs: [], outputs: [] },
     createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-01T00:00:00Z'
+};
+
+const stages = baseWorkflow?.stages || [];
+stages[0].steps.push(newStep);
+
+const workflow: Workflow = {
+    id: baseWorkflow?.id || 'workflow-1',
+    name: baseWorkflow?.name || 'Default Workflow',
+    description: baseWorkflow?.description || '',
+    status: 'current',
+    stages: stages || [],
+    assets: baseWorkflow?.assets || [],
+    createdAt: baseWorkflow?.createdAt || '2024-01-01T00:00:00Z',
     updatedAt: '2024-01-01T00:03:00Z'
 };
 
@@ -138,20 +36,6 @@ workflow = {
 const mission: Mission = {
     ...baseState.mission,
     workflow,
-    updatedAt: '2024-01-01T00:03:00Z'
-};
-
-// Current step details for workspace
-const currentStep: Step = {
-    id: 'step-1-1',
-    name: 'Query database',
-    description: 'Fetch customer feedback data from the database',
-    status: 'current',
-    assets: {
-        inputs: [],
-        outputs: []
-    },
-    createdAt: '2024-01-01T00:00:00Z',
     updatedAt: '2024-01-01T00:03:00Z'
 };
 
@@ -175,19 +59,7 @@ const deltas: Partial<MockDataSnapshot> = {
         ...baseState.workspace,
         type: 'stepDetails',
         title: 'Query Database',
-        content: {
-            text: JSON.stringify({
-                step: currentStep,
-                configuration: {
-                    database: 'customer_feedback',
-                    query: 'SELECT * FROM feedback WHERE date >= NOW() - INTERVAL 30 DAY',
-                    parameters: {
-                        limit: 1000
-                    }
-                }
-            }, null, 2),
-            assets: []
-        },
+        content: {},
         actionButtons: [
             {
                 label: 'Execute',
@@ -201,6 +73,10 @@ const deltas: Partial<MockDataSnapshot> = {
             }
         ],
         updatedAt: '2024-01-01T00:03:00Z'
+    },
+    workspaceState: {
+        ...baseState.workspaceState,
+        currentStepPath: ['step-1-1']
     }
 };
 

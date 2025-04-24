@@ -1,4 +1,4 @@
-import { Mission, Stage, Step, Asset, ChatMessage, Workspace, Workflow } from '../types';
+import { Mission, Stage, Step, Asset, ChatMessage, Workspace, Workflow, WorkspaceState } from '../types';
 import { MockDataSnapshot } from './data';
 import { mockDataSnapshot1 } from './mockDataSnapshot1';
 
@@ -62,6 +62,10 @@ const deltas: Partial<MockDataSnapshot> = {
             }
         ],
         updatedAt: '2024-01-01T00:01:00Z'
+    },
+    workspaceState: {
+        ...baseState.workspaceState,
+        currentMissionId: 'mission-1'
     }
 };
 

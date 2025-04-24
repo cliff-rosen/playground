@@ -1,4 +1,4 @@
-import { Mission, Stage, Step, Asset, ChatMessage, Workspace, Workflow } from '../types';
+import { Mission, Stage, Step, Asset, ChatMessage, Workspace, Workflow, WorkspaceState } from '../types';
 import { MockDataSnapshot } from './data';
 
 // Empty mock data snapshot
@@ -51,5 +51,11 @@ export const mockDataSnapshot0: MockDataSnapshot = {
         actionButtons: [],
         createdAt: '',
         updatedAt: ''
+    },
+    workspaceState: {
+        currentMissionId: null,
+        currentStageId: null,
+        currentStepPath: [],
+        viewMode: 'compact'
     }
 }; 
