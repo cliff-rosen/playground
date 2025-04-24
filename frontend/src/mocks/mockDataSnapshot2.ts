@@ -5,30 +5,6 @@ import { mockDataSnapshot1 } from './mockDataSnapshot1';
 // Base state
 const baseState = mockDataSnapshot1;
 
-// Mission proposal data
-const missionProposal: Mission = {
-    id: 'mission-1',
-    title: 'Customer Feedback Analysis',
-    description: 'Analyze customer feedback to identify key insights and trends',
-    goal: 'Create a report on customer feedback that contains the most common issues and suggestions for improvement',
-    status: 'pending',
-    workflow: {
-        id: '',
-        name: '',
-        description: '',
-        status: 'pending',
-        stages: [],
-        assets: [],
-        createdAt: '',
-        updatedAt: ''
-    },
-    assets: [],
-    inputs: ['Customer feedback database'],
-    outputs: ['Analysis report with key insights'],
-    createdAt: '2024-01-01T00:00:00Z',
-    updatedAt: '2024-01-01T00:00:00Z'
-};
-
 const mockThinkingWorkspace: Workspace = {
     ...baseState.workspace,
     type: 'thinking',
