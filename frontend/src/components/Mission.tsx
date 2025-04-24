@@ -57,12 +57,11 @@ export default function Mission({ className = '', mission }: MissionProps) {
                 <div>
                     <h3 className="text-xs font-medium text-gray-500 uppercase tracking-wider">Inputs</h3>
                     <ul className="mt-2 space-y-1 text-gray-600">
-                        {mission.assets
-                            .filter(asset => mission.inputs.includes(asset.id))
-                            .map(asset => (
-                                <li key={asset.id} className="flex items-center">
+                        {mission.inputs
+                            .map(input => (
+                                <li key={input} className="flex items-center">
                                     <span className="w-1.5 h-1.5 rounded-full bg-gray-400 mr-2"></span>
-                                    {asset.name}
+                                    {input}
                                 </li>
                             ))}
                     </ul>
@@ -70,12 +69,11 @@ export default function Mission({ className = '', mission }: MissionProps) {
                 <div>
                     <h3 className="text-xs font-medium text-gray-500 uppercase tracking-wider">Outputs</h3>
                     <ul className="mt-2 space-y-1 text-gray-600">
-                        {mission.assets
-                            .filter(asset => mission.outputs.includes(asset.id))
-                            .map(asset => (
-                                <li key={asset.id} className="flex items-center">
+                        {mission.outputs
+                            .map(output => (
+                                <li key={output} className="flex items-center">
                                     <span className="w-1.5 h-1.5 rounded-full bg-gray-400 mr-2"></span>
-                                    {asset.name}
+                                    {output}
                                 </li>
                             ))}
                     </ul>

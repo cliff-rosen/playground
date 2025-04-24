@@ -6,28 +6,10 @@ import { mockDataSnapshot2 } from './mockDataSnapshot2';
 const baseState = mockDataSnapshot2;
 
 // Mission data (moved from workspace to main mission)
-const mission: Mission = {
-    id: 'mission-1',
-    title: 'Customer Feedback Analysis',
-    description: 'Analyze customer feedback to identify key insights and trends',
-    goal: 'Create a report on customer feedback that contains the most common issues and suggestions for improvement',
-    status: 'current',
-    workflow: {
-        id: '',
-        name: '',
-        description: '',
-        status: 'pending',
-        stages: [],
-        assets: [],
-        createdAt: '',
-        updatedAt: ''
-    },
-    assets: [],
-    inputs: ['Customer feedback database'],
-    outputs: ['Analysis report with key insights'],
-    createdAt: '2024-01-01T00:00:00Z',
-    updatedAt: '2024-01-01T00:02:00Z'
-};
+var mission: Mission | undefined = baseState.workspace.content?.mission;
+if (mission) {
+    mission.status = 'current';
+}
 
 // Proposed workflow for the workspace
 const proposedWorkflow: Workflow = {
@@ -41,32 +23,7 @@ const proposedWorkflow: Workflow = {
             name: 'Search',
             description: 'Search and filter customer feedback',
             status: 'pending',
-            steps: [
-                {
-                    id: 'step-1-1',
-                    name: 'Query database',
-                    description: 'Fetch customer feedback data from the database',
-                    status: 'pending',
-                    assets: {
-                        inputs: [],
-                        outputs: []
-                    },
-                    createdAt: '2024-01-01T00:00:00Z',
-                    updatedAt: '2024-01-01T00:00:00Z'
-                },
-                {
-                    id: 'step-1-2',
-                    name: 'Filter relevant entries',
-                    description: 'Filter out irrelevant feedback entries',
-                    status: 'pending',
-                    assets: {
-                        inputs: [],
-                        outputs: []
-                    },
-                    createdAt: '2024-01-01T00:00:00Z',
-                    updatedAt: '2024-01-01T00:00:00Z'
-                }
-            ],
+            steps: [],
             assets: {
                 inputs: [],
                 outputs: []
@@ -79,32 +36,7 @@ const proposedWorkflow: Workflow = {
             name: 'Extract',
             description: 'Extract and analyze feedback data',
             status: 'pending',
-            steps: [
-                {
-                    id: 'step-2-1',
-                    name: 'Parse data',
-                    description: 'Parse the feedback data into a structured format',
-                    status: 'pending',
-                    assets: {
-                        inputs: [],
-                        outputs: []
-                    },
-                    createdAt: '2024-01-01T00:00:00Z',
-                    updatedAt: '2024-01-01T00:00:00Z'
-                },
-                {
-                    id: 'step-2-2',
-                    name: 'Validate format',
-                    description: 'Validate the parsed data format',
-                    status: 'pending',
-                    assets: {
-                        inputs: [],
-                        outputs: []
-                    },
-                    createdAt: '2024-01-01T00:00:00Z',
-                    updatedAt: '2024-01-01T00:00:00Z'
-                }
-            ],
+            steps: [],
             assets: {
                 inputs: [],
                 outputs: []
@@ -117,32 +49,7 @@ const proposedWorkflow: Workflow = {
             name: 'Generate',
             description: 'Generate insights from the analyzed data',
             status: 'pending',
-            steps: [
-                {
-                    id: 'step-3-1',
-                    name: 'Generate insights',
-                    description: 'Generate key insights from the analyzed data',
-                    status: 'pending',
-                    assets: {
-                        inputs: [],
-                        outputs: []
-                    },
-                    createdAt: '2024-01-01T00:00:00Z',
-                    updatedAt: '2024-01-01T00:00:00Z'
-                },
-                {
-                    id: 'step-3-2',
-                    name: 'Create report',
-                    description: 'Create a report with the generated insights',
-                    status: 'pending',
-                    assets: {
-                        inputs: [],
-                        outputs: []
-                    },
-                    createdAt: '2024-01-01T00:00:00Z',
-                    updatedAt: '2024-01-01T00:00:00Z'
-                }
-            ],
+            steps: [],
             assets: {
                 inputs: [],
                 outputs: []

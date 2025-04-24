@@ -63,8 +63,7 @@ export default function WorkspaceView({ workspace }: WorkspaceViewProps) {
                 }
                 break;
             case 'workflowStepStatus':
-            case 'extractionResult':
-            case 'analysisResult':
+            case 'stepDetails':
                 if (workspace.content.text) {
                     return (
                         <div className="mb-4">
