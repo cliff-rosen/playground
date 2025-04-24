@@ -38,7 +38,7 @@ const deltas: Partial<MockDataSnapshot> = {
         {
             id: 'msg-3b',
             role: 'assistant' as const,
-            content: "OK, let's proceed with that plan. Let me analyze the first stage of the workflow and find a good tool for the initial step.",
+            content: "Great, let's proceed with that plan. Let me analyze the first stage of the workflow and find a good tool for the initial step.",
             timestamp: '2024-01-01T00:03:00Z',
             metadata: {
                 stageId: 'stage-1',
@@ -58,6 +58,7 @@ const deltas: Partial<MockDataSnapshot> = {
         type: 'thinking',
         title: 'Thinking...',
         content: { text: "Thinking..." },
+        actionButtons: [],
     },
     workspaceState: {
         ...baseState.workspaceState,

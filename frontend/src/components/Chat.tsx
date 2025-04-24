@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Send } from 'lucide-react';
 import type { ChatMessage } from '../types';
 
@@ -8,6 +8,15 @@ interface ChatProps {
 
 export default function Chat({ messages }: ChatProps) {
     const [input, setInput] = useState('');
+    const messagesEndRef = useRef<HTMLDivElement>(null);
+
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
+
+    useEffect(() => {
+        scrollToBottom();
+    }, [messages]);
 
     return (
         <div className="h-full flex flex-col bg-white rounded-lg shadow-sm">
@@ -31,6 +40,7 @@ export default function Chat({ messages }: ChatProps) {
                         </div>
                     </div>
                 ))}
+                <div ref={messagesEndRef} />
             </div>
 
             {/* Input Area */}
