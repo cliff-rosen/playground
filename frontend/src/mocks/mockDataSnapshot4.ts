@@ -1,12 +1,10 @@
 import { Mission, Stage, Step, Asset, ChatMessage, Workspace, Workflow, WorkspaceState } from '../types';
 import { MockDataSnapshot } from './data';
-import { mockDataSnapshot3 } from './mockDataSnapshot3';
+import { mockDataSnapshot3a, workflow as baseWorkflow } from './mockDataSnapshot3a';
 
 // Base state
-const baseState = mockDataSnapshot3;
+const baseState = mockDataSnapshot3a;
 
-// Workflow data (moved from workspace to mission)
-const baseWorkflow = baseState.workspace.content?.workflow;
 
 const newStep: Step = {
     id: 'step-1-1',

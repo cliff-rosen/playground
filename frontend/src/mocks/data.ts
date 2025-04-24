@@ -5,6 +5,7 @@ import { mockDataSnapshot2 } from './mockDataSnapshot2';
 import { mockDataSnapshot2a } from './mockDataSnapshot2a';
 import { mockDataSnapshot2b } from './mockDataSnapshot2b';
 import { mockDataSnapshot3 } from './mockDataSnapshot3';
+import { mockDataSnapshot3a } from './mockDataSnapshot3a';
 import { mockDataSnapshot4 } from './mockDataSnapshot4';
 
 // Mock data snapshot type
@@ -283,4 +284,4 @@ export const mockDataSnapshotSample: MockDataSnapshot = {
 };
 
 // Array of mock data snapshots
-export const mockDataSnapshots: MockDataSnapshots = [mockDataSnapshot0, mockDataSnapshot1, mockDataSnapshot2, mockDataSnapshot2a, mockDataSnapshot2b, mockDataSnapshot3, mockDataSnapshot4];
+export const mockDataSnapshots: MockDataSnapshots = [mockDataSnapshot0, mockDataSnapshot1, mockDataSnapshot2, mockDataSnapshot2a, mockDataSnapshot2b, mockDataSnapshot3, mockDataSnapshot3a, mockDataSnapshot4];
